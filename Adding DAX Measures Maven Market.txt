@@ -1,0 +1,36 @@
+1) In the DATA view, add the following calculated columns:
+
+In the Calendar table, add a column named "Weekend". Equals "Y" for Saturdays or Sundays (otherwise "N") 
+-- Weekend = IF( 'Calendar'[Name of Day] = "Saturday" || 'Calendar'[Name of Day] = "Sunday", "Y", "N")
+
+
+In the Calendar table, add a column named "End of Month". Returns the last date of the current month for each row
+End of Month = EOMONTH([Date], 0)
+
+
+In the Customers table, add a column named "Current Age". Calculates current customer ages using the "birthdate" column and the TODAY() function
+Current_Age = DATEDIFF(Customers[birthdate],TODAY(),YEAR)
+
+
+In the Customers table, add a column named "Priority" Equals "High" for customers who own homes and have Golden membership cards (otherwise "Standard")   
+Priority = IF(Customers[homeowner] = "Y" || Customers[member_card] = "Golden", "High", "Standard") 
+
+
+
+In the Customers table, add a column named "Short_Country" Returns the first three characters of the customer country, and converts to all uppercase 
+Short_Country = UPPER( LEFT(Customers[customer_country], 3))
+
+
+
+
+In the Customers table, add a column named "House Number" Extracts all characters/numbers before the first space in the "customer_address" column (hint: use SEARCH)
+
+House Number = LEFT( Customers[customer_address], SEARCH(" ", Customers[customer_address])-1)
+
+
+
+In the Products table, add a column named "Price_Tier" Equals "High" if the retail price is >$3, "Mid" if the retail price is >$1, and "Low" otherwise
+
+Price_Tier = IF(Products[product_retail_price] > 3 , "High",
+if( Products[product_retail_price] > 1, "Mid", "Low")
+)
